@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>To-Do App — Azure Lab</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem
+auto; }
+.done { text-decoration: line-through; color: #999; }
+form { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+input { flex: 1; padding: 0.4rem; font-size: 1rem; }
+button { padding: 0.4rem 1rem; background: #0078D4; color: white;
+border: none; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>Mis Tareas</h1>
+<form action="/add" method="post">
+<input name="title" placeholder="Escribir nueva tarea..." required>
+<button type="submit">Agregar</button>
+
+</form>
+<ul>
+{% for task in tasks %}
+<li class="{{ 'done' if task.done else '' }}">
+{{ task.title }}
+{% if not task.done %}
+<a href="/done/{{ task.id }}" style="margin-left:1rem; fontsize:
+0.85rem;">Completar</a>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+</body>
+</html>
